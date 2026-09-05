@@ -32,10 +32,42 @@ fabricate one.
   alongside other `cloud-itonami`/`etzhayyim` compliance-fact sources via
   `com-junkawasaki/root`'s `scripts/compliance-fact-query.cljs`).
 
-倫理規則 (Ethics Rules) was verified by directly reading the source
-PDF's cover page (enacted 1966-12-01, most recently revised
-2019-07-22); the self-regulatory-initiatives overview page was directly
-WebFetch-verified.
+Dates come off each document's **own cover page**, not off the page that
+links it. 倫理規則 (Ethics Rules) is enacted 1966-12-01 and most recently
+revised **2026-07-22**; 倫理規則実務ガイダンス第１号 is enacted 2022-12-15
+and most recently revised 2026-04-17. Where a source prints no precise
+date — every `:governance-program` entry — the field is **absent** rather
+than guessed. Absent is not the same as unknown-and-filled-in.
+
+Every URL was fetched on 2026-09-06 and returned 200 with the expected
+content type. That check earns its keep: 品質管理レビュー基準・手続 also
+returns 200, but redirects to the members-only SSO login, so the bytes
+behind it are not the standard — it is deliberately **not** cited here.
+
+### 2026-09-06: the 倫理規則 citation was pointing at a superseded edition
+
+The entry cited `2-22-0-2-20190618.pdf` with `last-revised-date
+2019-07-22`. That accurately described *that document* — its cover does
+say 最終改正2019年７月22日 — but the document had since been superseded four
+times. The current edition (`2-22-0-2-20260730.pdf`, same `2-22-0-2`
+document code) prints the chain: 2019-07-22 → 2022-07-25 → 2024-07-18 →
+2025-07-23 → **2026-07-22**. Three of those four revisions predate the
+entry's own `retrieved-at 2026-07-15`, so the record was already stale
+when it was written; this is not drift that accumulated afterwards.
+
+The superseded URL is retained on the entry as `supersedes-url` rather
+than deleted, so the correction stays visible in the data and a later
+pass does not rediscover the 2019 PDF and re-add it as current.
+
+**Why the gate did not catch it.** `last-revised-date` was in the cljc
+from the first commit and was never carried into the Kotoba port, so it
+was absent from the parity test's compared-field list — the one field
+that says *which edition* an entry describes was the field nobody
+compared. Measured on the pre-change tree: mutating that date to
+`1900-01-01` left all 10 tests green, while mutating the URL turned them
+red. Both it and `supersedes-url` are compared now, and a test asserts
+that the compared-field list covers every field the catalog actually
+uses.
 
 ## License
 

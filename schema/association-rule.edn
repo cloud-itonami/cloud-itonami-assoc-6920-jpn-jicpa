@@ -11,6 +11,9 @@
  :association-rule/kind {:db/index true}
  :association-rule/url {}
  :association-rule/url-provenance {:db/index true}
+ ;; The URL an entry previously cited, when a citation was corrected to a
+ ;; newer edition. Recorded so "was this ever wrong" stays answerable.
+ :association-rule/supersedes-url {}
  :association-rule/established-date {}
  :association-rule/last-revised-date {}
  :association-rule/retrieved-at {}
