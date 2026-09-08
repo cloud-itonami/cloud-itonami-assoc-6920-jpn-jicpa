@@ -47,7 +47,7 @@
   review STANDARD (品質管理レビュー基準・手続) also returns 200, but it
   redirects to the members-only SSO login, so the bytes behind it are not the
   standard and it is deliberately NOT cited here."
-  (:require [clojure.string :as str]))
+  (:require [kotoba.lang.text :as str]))
 
 (def catalog
   "assoc-slug -> vector of self-regulatory rule entries."
